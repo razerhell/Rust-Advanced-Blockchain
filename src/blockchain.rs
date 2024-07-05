@@ -109,9 +109,9 @@ impl Blockchain {
                 break;
             }
             let block = option.unwrap();
-            'outer: for tx in block.get_transactions() {
+            for tx in block.get_transactions() {
                 let txid_hex = HEXLOWER.encode(tx.get_id());
-                for (idx, out) in tx.get_vout().iter().enumerate() {
+                'outer: for (idx, out) in tx.get_vout().iter().enumerate() {
                     
                     if let Some(outs) = spent_txos.get(txid_hex.as_str()) {
                         for spend_out_idx in outs {
